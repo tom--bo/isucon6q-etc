@@ -1,0 +1,14 @@
+TARGETS = unattended-upgrades unscd lvm2-lvmetad lvm2-lvmpolld lxd uuidd open-vm-tools lxcfs thermald resolvconf atd irqbalance mysql mdadm ufw nginx plymouth urandom open-iscsi iscsid sendsigs rsyslog umountnfs.sh hwclock.sh networking umountfs cryptdisks cryptdisks-early umountroot mdadm-waitidle halt reboot
+iscsid: open-iscsi
+sendsigs: plymouth thermald unattended-upgrades unscd atd irqbalance mysql lxd uuidd mdadm iscsid open-vm-tools lxcfs open-iscsi nginx
+rsyslog: thermald atd irqbalance sendsigs mysql mdadm nginx
+umountnfs.sh: plymouth thermald unattended-upgrades unscd atd irqbalance rsyslog mysql lxd uuidd sendsigs open-vm-tools lxcfs nginx
+hwclock.sh: atd rsyslog mysql uuidd
+networking: mysql umountnfs.sh iscsid open-iscsi nginx
+umountfs: plymouth thermald resolvconf unattended-upgrades unscd lvm2-lvmetad atd irqbalance lvm2-lvmpolld networking mysql urandom umountnfs.sh lxd uuidd mdadm iscsid open-vm-tools lxcfs hwclock.sh open-iscsi nginx
+cryptdisks: umountfs
+cryptdisks-early: umountfs cryptdisks
+umountroot: umountfs cryptdisks-early cryptdisks
+mdadm-waitidle: umountroot
+halt: umountroot mdadm-waitidle
+reboot: umountroot mdadm-waitidle

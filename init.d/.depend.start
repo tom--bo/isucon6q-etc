@@ -1,0 +1,18 @@
+TARGETS = rsyslog unscd lvm2-lvmetad lvm2-lvmpolld lxd uuidd open-vm-tools lxcfs killprocs apport thermald atd irqbalance mysql mdadm single ssh acpid dbus rsync cron nginx plymouth grub-common rc.local ondemand
+INTERACTIVE =
+thermald: rsyslog
+atd: rsyslog
+irqbalance: rsyslog
+mysql: rsyslog
+mdadm: rsyslog
+single: killprocs
+ssh: rsyslog
+acpid: rsyslog
+dbus: rsyslog
+rsync: rsyslog
+cron: rsyslog
+nginx: rsyslog
+plymouth: thermald rsyslog unscd lvm2-lvmetad atd irqbalance lvm2-lvmpolld mysql lxd uuidd mdadm open-vm-tools lxcfs ssh acpid apport dbus rsync cron nginx
+grub-common: thermald rsyslog unscd lvm2-lvmetad atd irqbalance lvm2-lvmpolld mysql lxd uuidd mdadm open-vm-tools lxcfs ssh acpid apport dbus rsync cron nginx
+rc.local: thermald rsyslog unscd lvm2-lvmetad atd irqbalance lvm2-lvmpolld mysql lxd uuidd mdadm open-vm-tools lxcfs ssh acpid apport dbus rsync cron nginx
+ondemand: thermald rsyslog unscd lvm2-lvmetad atd irqbalance lvm2-lvmpolld mysql lxd uuidd mdadm open-vm-tools lxcfs ssh acpid apport dbus rsync cron nginx
